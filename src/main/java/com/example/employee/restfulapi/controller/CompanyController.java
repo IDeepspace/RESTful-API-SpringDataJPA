@@ -48,4 +48,10 @@ public class CompanyController {
     Page companies = companyRepository.findAll(pageable);
     return new ResponseEntity<>(companies, HttpStatus.OK);
   }
+
+  @PostMapping(value = "/companies")
+  public ResponseEntity addCompany(@RequestBody Company company) throws Exception {
+    companyRepository.save(company);
+    return new ResponseEntity<>(HttpStatus.CREATED);
+  }
 }
