@@ -10,16 +10,23 @@ import org.springframework.http.HttpStatus;
 
 
 @RestController
-@RequestMapping(value = "/companies")
 public class CompanyController {
   @Autowired
   private CompanyRepository companyRepository;
 
-  @GetMapping(value = "")
+  @GetMapping(value = "/companies")
   public ResponseEntity getCompanies() throws Exception {
 
     List<Company> companyList = companyRepository.findAll();
 
     return new ResponseEntity<>(companyList, HttpStatus.OK);
+  }
+
+  @GetMapping(value = "/companies/{id}")
+  public ResponseEntity getCompanyById(@PathVariable Long id) throws Exception {
+
+    Company company = companyRepository.findOne(id);
+
+    return new ResponseEntity<>(company, HttpStatus.OK);
   }
 }
