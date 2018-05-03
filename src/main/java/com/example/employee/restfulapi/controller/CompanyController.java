@@ -54,4 +54,19 @@ public class CompanyController {
     companyRepository.save(company);
     return new ResponseEntity<>(HttpStatus.CREATED);
   }
+
+  @PutMapping(value = "/companies/{id}")
+  public ResponseEntity updateCompany(@PathVariable Long id, @RequestBody Company newCompany) throws Exception {
+    Company company = companyRepository.findOne(id);
+    company.setCompanyName(newCompany.getCompanyName());
+    company.setEmployeesNumber(newCompany.getEmployeesNumber());
+    companyRepository.save(company);
+    return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+  }
+
+  @DeleteMapping(value = "/companies/{id}")
+  public ResponseEntity deleteCompany(@PathVariable long id) throws Exception {
+    companyRepository.delete(id);
+    return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+  }
 }
