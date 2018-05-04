@@ -58,7 +58,7 @@ public class EmployeeController {
   @PutMapping(value = "/{id}")
   public ResponseEntity updateEmployee(@PathVariable Long id, @RequestBody Employee newEmployee) throws Exception {
     Employee employee = employeeRepository.findOne(id);
-    
+
     employee.setName(newEmployee.getName());
     employee.setAge(newEmployee.getAge());
     employee.setGender(newEmployee.getGender());
@@ -66,6 +66,12 @@ public class EmployeeController {
     employee.setCompanyId(newEmployee.getCompanyId());
 
     employeeRepository.save(employee);
+    return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+  }
+
+  @DeleteMapping(value = "/{id}")
+  public ResponseEntity deleteEmployee(@PathVariable long id) throws Exception {
+    employeeRepository.delete(id);
     return new ResponseEntity<>(HttpStatus.NO_CONTENT);
   }
 
