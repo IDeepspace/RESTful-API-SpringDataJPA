@@ -49,5 +49,11 @@ public class EmployeeController {
     return new ResponseEntity<>(employeeList, HttpStatus.OK);
   }
 
+  @PostMapping(value = "")
+  public ResponseEntity addCompany(@RequestBody Employee employee) throws Exception {
+    employeeRepository.save(employee);
+    return new ResponseEntity<>(HttpStatus.CREATED);
+  }
+
 
 }
