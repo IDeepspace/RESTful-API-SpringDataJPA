@@ -36,5 +36,12 @@ public class EmployeeController {
     return new ResponseEntity<>(employee, HttpStatus.OK);
   }
 
+  @GetMapping(value = "/page/{page}/pageSize/{pageSize}")
+  public ResponseEntity getEmployeeByPage(@PathVariable int page, @PathVariable int pageSize) throws Exception {
+    Pageable pageable = new PageRequest(page-1, pageSize);
+    Page employees = employeeRepository.findAll(pageable);
+    return new ResponseEntity<>(employees, HttpStatus.OK);
+  }
+
 
 }
