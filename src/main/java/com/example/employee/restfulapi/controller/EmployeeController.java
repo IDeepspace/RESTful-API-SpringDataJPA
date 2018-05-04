@@ -27,4 +27,14 @@ public class EmployeeController {
 
     return new ResponseEntity<>(employeeList, HttpStatus.OK);
   }
+
+  @GetMapping(value = "/{id}")
+  public ResponseEntity getCompanyById(@PathVariable Long id) throws Exception {
+
+    Employee employee = employeeRepository.findOne(id);
+
+    return new ResponseEntity<>(employee, HttpStatus.OK);
+  }
+
+
 }
